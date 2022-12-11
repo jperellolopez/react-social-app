@@ -1,0 +1,55 @@
+SANITY.IO CONFIG
+-- Open terminal in social_backend folder
+-- Paste in terminal:
+npm install -g @sanity/cli && sanity init --project-plan boosted-free-2021-12-08 
+
+-- Select Google
+-- Name the project
+-- Select the route of the backend folder (social_backend)
+-- Select clean project option
+-- Press n (not use typescript)
+-- select npm
+-- Commands will appear: 
+    npm run dev -> start the app in localhost3333. Click on the link to view. Login.
+    sanity manage -> open project settings in a new browser window.
+
+CREATE SCHEMAS (BACKEND CONF)
+-- This steps are equivalent to create a database where you can create and store users, comments and more.
+-- go to social_backend>schemas folder and create new file user.js. Import it from index.js
+-- On browser, go to User > pencil button > UserName: usertest, Image: https://exampleuserimage.com Click on publish. 
+-- Do the same with the rest of schemas and separe them with a comma on index.js
+
+TAILWIND (FRONTEND CONF)
+-- Open terminal on social_frontend folder
+-- npx create-react-app@next --scripts-version=@next --template=cra-template@next ./
+-- npm install -D tailwindcss postcss autoprefixer 
+-- npx tailwindcss init -p
+-- go to tailwind.config.js and replace the content https://gist.github.com/adrianhajdin/a53fdfe71225af2f550b853ae983f0d0
+-- import tailwind base, utilities and components on index.css
+-- Add packages to package.json running on a terminal: npm install @sanity/client @sanity/image-url react-google-login react-icons react-loader-spinner react-masonry-css react-router-dom uuid --force
+-- type npm start to start the app on localhost:3000
+
+FRONTEND COMPONENTS 
+-- Create a components folder (for simple components) and a container folder (for large components which integrate small components)
+-- Create the components and add the routes to the App.js file
+
+LOGIN 
+-- Place in social_frontend and: npm install @react-oauth/google jwt-decode --force
+-- Generate Oauth credentials from https://console.cloud.google.com/ (min 1.59 of https://www.youtube.com/watch?v=CcBHZ0t2Qwc)
+-- Create a file for environment variables (env.development) and paste the credentials, so they can be accesible from Login component using process.env.VARIABLE_NAME. Do the same with the project ID and token from client.js file 
+
+DEPLOYMENT
+-- On Netlify. Create account, go to sites section.
+-- On Frontend/public create a new file called _redirects
+-- open a terminal on frontend folder and run npm run build
+-- Right click the build folder and reveal in file explorer
+-- drag the build folder to Netlify
+-- go to "domain settings"  > options > edit site name
+-- open the website and copy the http address
+-- go to sanity manager (command "sanity manage" on backend folder)
+-- go to settings > api settings > add cors origin > paste http address > check allow credentials > save
+-- go to console.cloud.google.com > select the project on the top list > panel > apis y servicios > credenciales > click on id de clientes oauth 2.0 > authorized javascript origins > add > paste the url > save 
+-- on the site url, right click > inspect > application tab > expand local storage > rclick and clear
+
+-- FRONT: cd to social_frontend and type npm start
+-- BACK: cd to social_backend and type npm run dev
